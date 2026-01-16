@@ -1,7 +1,6 @@
 /**
  * File for constants such as headers. Tailor this to your own spreadsheet
  *
- * I suggest also making an env file as well
  */
 
 /**

@@ -3,10 +3,10 @@ function onOpen() {
   // Or DocumentApp, SlidesApp or FormApp.
   ui.createMenu("Sheet to Tasks")
     .addItem("Overwrite Tasks", "menuItem1")
-    .addItem("Sync Tasks", "menuItem2")
-    .addSeparator()
-    .addSubMenu(ui.createMenu("Sub-menu").addItem("Open side-menu", "menuItem2"))
-    .addToUi();
+    .addItem("Sync Tasks", "menuItem2");
+  // .addSeparator()
+  // .addSubMenu(ui.createMenu("Sub-menu").addItem("Open side-menu", "menuItem2"))
+  // .addToUi();
 }
 
 function menuItem1() {
@@ -36,12 +36,12 @@ function menuItem2() {
   syncTasks();
 }
 
-function menuItem3() {
-  // SpreadsheetApp.getUi() // Or DocumentApp, SlidesApp or FormApp.
-  //    .alert('You clicked the second menu item!');
-  // Display a sidebar with custom HtmlService content.
-  const htmlOutput = HtmlService.createHtmlOutput(
-    '<p style="background-color:black; color:white">yk, there\'s always a better way</p>'
-  ).setTitle("This is truly, a test of skill");
-  SpreadsheetApp.getUi().showSidebar(htmlOutput);
-}
+// function menuItem3() {
+//   // SpreadsheetApp.getUi() // Or DocumentApp, SlidesApp or FormApp.
+//   //    .alert('You clicked the second menu item!');
+//   // Display a sidebar with custom HtmlService content.
+//   const htmlOutput = HtmlService.createHtmlOutput(
+//     '<p style="background-color:black; color:white">yk, there\'s always a better way</p>'
+//   ).setTitle("This is truly, a test of skill");
+//   SpreadsheetApp.getUi().showSidebar(htmlOutput);
+// }

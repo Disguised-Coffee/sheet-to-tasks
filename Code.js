@@ -1,42 +1,4 @@
 /**
- * Miscaneous runner.
- * Should hold glue logic of flows.
- */
-
-function main() {
-  // _retrieve_assignemnts()
-
-  // task = {
-  //   title: "ECE 225 - consume chips",
-  //   notes: "Eat chips",
-  //   due: new Date(Date.now()*0.5).toISOString()
-  // }
-
-  // new Date().to
-
-  // console.log(TASK_LIST)
-  // // id = addTask(task,TASK_LIST)
-
-  // // console.log(id)
-
-  // // task = getTask(id,TASK_LIST)
-
-  // // console.log(task)
-
-  // console.log(task)
-
-  // for row in sheet, test format to task
-  var sheet = SpreadsheetApp.getActive().getSheetByName(CONSTANTS.SHEET_NAME);
-  var data = sheet.getRange(CONSTANTS.RANGES.dataRange).getValues();
-  data.forEach(function (row) {
-    if (SheetHandler.validateAssignmentRow(row)) {
-      var task = SheetHandler.formatRowToTask(row);
-      console.log(task);
-    }
-  });
-}
-
-/**
  * Enters data from sheet into Google Tasks.
  */
 function enterTasks() {
@@ -69,17 +31,16 @@ function enterTasks() {
         }
       }
       r = addTask(task, TASK_LIST);
-      console.log(r);
+
       // after adding the task, update the task ID in the sheet
       SheetHandler.updateTaskID(i + CONSTANTS.RANGES.rowOffset, r);
       SheetHandler.updateSyncTimestamp(i + CONSTANTS.RANGES.rowOffset);
-      break; // for testing purposes only add one task
     }
   }
 }
 
 /**
- * Syncs tasks from Google Tasks back to the sheet.
+ * Syncs tasks from Google Tasks back to the sheet, favoring updates from Google Tasks
  */
 function syncTasks() {
   console.log("Syncing tasks...");
@@ -107,7 +68,6 @@ function syncTasks() {
 
         if (taskUpdatedTime > sheetUpdatedTime) {
           // task is newer, update sheet
-
           SheetHandler.updateTaskRowInfo(i + CONSTANTS.RANGES.rowOffset, existingTask);
           SheetHandler.updateSyncTimestamp(i + CONSTANTS.RANGES.rowOffset);
           console.log("Updated task ID:", updatedTaskID);
