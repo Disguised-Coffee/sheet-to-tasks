@@ -105,6 +105,16 @@ class SheetHandler {
     }
   }
 
+  /**
+   *
+   * @param {Array} taskInfoRow as a list
+   */
+  static appendTaskRow(taskInfoRow) {
+    let sheet = SheetHandler.getSheet();
+
+    sheet.appendRow(taskInfoRow);
+  }
+
   static updateSyncTimestamp(rowNum) {
     SheetHandler.getSheet()
       .getRange(rowNum, CONSTANTS.HEADER.lastSynced + 1)

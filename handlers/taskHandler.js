@@ -73,20 +73,16 @@ function updateTask(taskInfo, taskListId, taskId) {
  * @param  {string} taskListId The tasklist ID.
  * @see https://developers.google.com/tasks/reference/rest/v1/tasks/list
  */
-function listTasks(taskListId) {
+function getTasklistItems(taskListId) {
   try {
     // List the task items of specified tasklist using taskList id.
     const tasks = Tasks.Tasks.list(taskListId);
     // If tasks are available then print all task of given tasklists.
     if (!tasks.items) {
-      console.log("No tasks found.");
+      console.error("No tasks found.");
       return;
     }
-    // Print the task title and task id of specified tasklist.
-    for (let i = 0; i < tasks.items.length; i++) {
-      const task = tasks.items[i];
-      console.log('Task with title "%s" and ID "%s" was found.', task.title, task.id);
-    }
+    return tasks.items;
   } catch (err) {
     // TODO (developer) - Handle exception from Task API
     console.log("Failed with an error %s", err.message);

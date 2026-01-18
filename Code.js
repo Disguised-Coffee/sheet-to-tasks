@@ -80,6 +80,52 @@ function syncTasks() {
 }
 
 /**
+ * Adds tasks added on Google Tasks that aren't in the sheet
+ *
+ * Ideally, something with a hashmap
+ *
+ * (does it matter which list we put into a hashmap?)
+ * (it likely does.)
+ */
+function syncUnlistedTasks() {
+  // get all taskIds from spreadsheet into map. We can
+  let map = new Map();
+
+  l = getTasklistItems(TASK_LIST);
+
+  // l.forEach((element) => {
+  //   map.set(element.id, 1);
+  // });
+
+  // with list of IDs, go through sheet and remove ids foudn in the list
+  const rows = SheetHandler.getRows();
+
+  for (let i = 0; i < rows.length; i++) {
+    let row = rows[i];
+    let taskID = row[CONSTANTS.HEADER.taskID];
+    map.set(taskID, 1);
+  }
+  return;
+
+  // target condition:
+  l.forEach((element) => {
+    if (!map.has(element.id)) {
+      // Task doesn't exist!
+      // add the task to the sheet
+      // get task information, and append it correctly.
+      // for title, try to split from " - "
+      // default to putting this entirely in the assignment name
+      // try{
+      //   element.title
+      //   // taskInfoRow
+      // }
+    }
+  });
+
+  //
+}
+
+/**
  * Prunes tasks in Google Tasks that are no longer in the sheet.
  */
 function pruneTasks() {
